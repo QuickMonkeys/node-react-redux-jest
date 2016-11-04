@@ -1,6 +1,6 @@
 # node-react-redux-jest
 
-## A simple example to demonstrate the functionality of jest with react and redux.
+## A simple example to demonstrate the functionality of jest to test react applications.
 
 The data is representing by a json file to be used by the component.
 
@@ -29,3 +29,7 @@ To execute the tests:
 run `npm t` to exetute all tests.
 
 run `npm t <file name>` to execute a specific test.
+
+Tip: You can execute a test using a text that match with the test suites name.
+
+e.g.: run `npm t acti` will execute the action.spec.js test suite.
