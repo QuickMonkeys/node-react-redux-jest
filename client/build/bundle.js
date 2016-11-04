@@ -34619,15 +34619,15 @@
 	
 	var _reactRedux = __webpack_require__(289);
 	
-	var _reducer = __webpack_require__(308);
+	var _reducer = __webpack_require__(298);
 	
 	var _reducer2 = _interopRequireDefault(_reducer);
 	
-	var _languages = __webpack_require__(309);
+	var _languages = __webpack_require__(300);
 	
 	var _languages2 = _interopRequireDefault(_languages);
 	
-	var _search = __webpack_require__(312);
+	var _search = __webpack_require__(303);
 	
 	var _search2 = _interopRequireDefault(_search);
 	
@@ -35863,15 +35863,15 @@
 	
 	var _warning2 = _interopRequireDefault(_warning);
 	
-	var _isPlainObject = __webpack_require__(296);
+	var _isPlainObject = __webpack_require__(270);
 	
 	var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
 	
-	var _hoistNonReactStatics = __webpack_require__(306);
+	var _hoistNonReactStatics = __webpack_require__(296);
 	
 	var _hoistNonReactStatics2 = _interopRequireDefault(_hoistNonReactStatics);
 	
-	var _invariant = __webpack_require__(307);
+	var _invariant = __webpack_require__(297);
 	
 	var _invariant2 = _interopRequireDefault(_invariant);
 	
@@ -36283,295 +36283,6 @@
 
 /***/ },
 /* 296 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var baseGetTag = __webpack_require__(297),
-	    getPrototype = __webpack_require__(303),
-	    isObjectLike = __webpack_require__(305);
-	
-	/** `Object#toString` result references. */
-	var objectTag = '[object Object]';
-	
-	/** Used for built-in method references. */
-	var funcProto = Function.prototype,
-	    objectProto = Object.prototype;
-	
-	/** Used to resolve the decompiled source of functions. */
-	var funcToString = funcProto.toString;
-	
-	/** Used to check objects for own properties. */
-	var hasOwnProperty = objectProto.hasOwnProperty;
-	
-	/** Used to infer the `Object` constructor. */
-	var objectCtorString = funcToString.call(Object);
-	
-	/**
-	 * Checks if `value` is a plain object, that is, an object created by the
-	 * `Object` constructor or one with a `[[Prototype]]` of `null`.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @since 0.8.0
-	 * @category Lang
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is a plain object, else `false`.
-	 * @example
-	 *
-	 * function Foo() {
-	 *   this.a = 1;
-	 * }
-	 *
-	 * _.isPlainObject(new Foo);
-	 * // => false
-	 *
-	 * _.isPlainObject([1, 2, 3]);
-	 * // => false
-	 *
-	 * _.isPlainObject({ 'x': 0, 'y': 0 });
-	 * // => true
-	 *
-	 * _.isPlainObject(Object.create(null));
-	 * // => true
-	 */
-	function isPlainObject(value) {
-	  if (!isObjectLike(value) || baseGetTag(value) != objectTag) {
-	    return false;
-	  }
-	  var proto = getPrototype(value);
-	  if (proto === null) {
-	    return true;
-	  }
-	  var Ctor = hasOwnProperty.call(proto, 'constructor') && proto.constructor;
-	  return typeof Ctor == 'function' && Ctor instanceof Ctor &&
-	    funcToString.call(Ctor) == objectCtorString;
-	}
-	
-	module.exports = isPlainObject;
-
-
-/***/ },
-/* 297 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var Symbol = __webpack_require__(298),
-	    getRawTag = __webpack_require__(301),
-	    objectToString = __webpack_require__(302);
-	
-	/** `Object#toString` result references. */
-	var nullTag = '[object Null]',
-	    undefinedTag = '[object Undefined]';
-	
-	/** Built-in value references. */
-	var symToStringTag = Symbol ? Symbol.toStringTag : undefined;
-	
-	/**
-	 * The base implementation of `getTag` without fallbacks for buggy environments.
-	 *
-	 * @private
-	 * @param {*} value The value to query.
-	 * @returns {string} Returns the `toStringTag`.
-	 */
-	function baseGetTag(value) {
-	  if (value == null) {
-	    return value === undefined ? undefinedTag : nullTag;
-	  }
-	  value = Object(value);
-	  return (symToStringTag && symToStringTag in value)
-	    ? getRawTag(value)
-	    : objectToString(value);
-	}
-	
-	module.exports = baseGetTag;
-
-
-/***/ },
-/* 298 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var root = __webpack_require__(299);
-	
-	/** Built-in value references. */
-	var Symbol = root.Symbol;
-	
-	module.exports = Symbol;
-
-
-/***/ },
-/* 299 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var freeGlobal = __webpack_require__(300);
-	
-	/** Detect free variable `self`. */
-	var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
-	
-	/** Used as a reference to the global object. */
-	var root = freeGlobal || freeSelf || Function('return this')();
-	
-	module.exports = root;
-
-
-/***/ },
-/* 300 */
-/***/ function(module, exports) {
-
-	/* WEBPACK VAR INJECTION */(function(global) {/** Detect free variable `global` from Node.js. */
-	var freeGlobal = typeof global == 'object' && global && global.Object === Object && global;
-	
-	module.exports = freeGlobal;
-	
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
-
-/***/ },
-/* 301 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var Symbol = __webpack_require__(298);
-	
-	/** Used for built-in method references. */
-	var objectProto = Object.prototype;
-	
-	/** Used to check objects for own properties. */
-	var hasOwnProperty = objectProto.hasOwnProperty;
-	
-	/**
-	 * Used to resolve the
-	 * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
-	 * of values.
-	 */
-	var nativeObjectToString = objectProto.toString;
-	
-	/** Built-in value references. */
-	var symToStringTag = Symbol ? Symbol.toStringTag : undefined;
-	
-	/**
-	 * A specialized version of `baseGetTag` which ignores `Symbol.toStringTag` values.
-	 *
-	 * @private
-	 * @param {*} value The value to query.
-	 * @returns {string} Returns the raw `toStringTag`.
-	 */
-	function getRawTag(value) {
-	  var isOwn = hasOwnProperty.call(value, symToStringTag),
-	      tag = value[symToStringTag];
-	
-	  try {
-	    value[symToStringTag] = undefined;
-	    var unmasked = true;
-	  } catch (e) {}
-	
-	  var result = nativeObjectToString.call(value);
-	  if (unmasked) {
-	    if (isOwn) {
-	      value[symToStringTag] = tag;
-	    } else {
-	      delete value[symToStringTag];
-	    }
-	  }
-	  return result;
-	}
-	
-	module.exports = getRawTag;
-
-
-/***/ },
-/* 302 */
-/***/ function(module, exports) {
-
-	/** Used for built-in method references. */
-	var objectProto = Object.prototype;
-	
-	/**
-	 * Used to resolve the
-	 * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
-	 * of values.
-	 */
-	var nativeObjectToString = objectProto.toString;
-	
-	/**
-	 * Converts `value` to a string using `Object.prototype.toString`.
-	 *
-	 * @private
-	 * @param {*} value The value to convert.
-	 * @returns {string} Returns the converted string.
-	 */
-	function objectToString(value) {
-	  return nativeObjectToString.call(value);
-	}
-	
-	module.exports = objectToString;
-
-
-/***/ },
-/* 303 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var overArg = __webpack_require__(304);
-	
-	/** Built-in value references. */
-	var getPrototype = overArg(Object.getPrototypeOf, Object);
-	
-	module.exports = getPrototype;
-
-
-/***/ },
-/* 304 */
-/***/ function(module, exports) {
-
-	/**
-	 * Creates a unary function that invokes `func` with its argument transformed.
-	 *
-	 * @private
-	 * @param {Function} func The function to wrap.
-	 * @param {Function} transform The argument transform.
-	 * @returns {Function} Returns the new function.
-	 */
-	function overArg(func, transform) {
-	  return function(arg) {
-	    return func(transform(arg));
-	  };
-	}
-	
-	module.exports = overArg;
-
-
-/***/ },
-/* 305 */
-/***/ function(module, exports) {
-
-	/**
-	 * Checks if `value` is object-like. A value is object-like if it's not `null`
-	 * and has a `typeof` result of "object".
-	 *
-	 * @static
-	 * @memberOf _
-	 * @since 4.0.0
-	 * @category Lang
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
-	 * @example
-	 *
-	 * _.isObjectLike({});
-	 * // => true
-	 *
-	 * _.isObjectLike([1, 2, 3]);
-	 * // => true
-	 *
-	 * _.isObjectLike(_.noop);
-	 * // => false
-	 *
-	 * _.isObjectLike(null);
-	 * // => false
-	 */
-	function isObjectLike(value) {
-	  return value != null && typeof value == 'object';
-	}
-	
-	module.exports = isObjectLike;
-
-
-/***/ },
-/* 306 */
 /***/ function(module, exports) {
 
 	/**
@@ -36627,7 +36338,7 @@
 
 
 /***/ },
-/* 307 */
+/* 297 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -36685,7 +36396,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(72)))
 
 /***/ },
-/* 308 */
+/* 298 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -36694,7 +36405,7 @@
 	    value: true
 	});
 	
-	var _immutable = __webpack_require__(315);
+	var _immutable = __webpack_require__(299);
 	
 	var _immutable2 = _interopRequireDefault(_immutable);
 	
@@ -36728,294 +36439,7 @@
 	};
 
 /***/ },
-/* 309 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	
-	var _redux = __webpack_require__(268);
-	
-	var _reactRedux = __webpack_require__(289);
-	
-	var _languages = __webpack_require__(310);
-	
-	var actions = _interopRequireWildcard(_languages);
-	
-	var _languages2 = __webpack_require__(311);
-	
-	var _languages3 = _interopRequireDefault(_languages2);
-	
-	var _immutable = __webpack_require__(315);
-	
-	var _immutable2 = _interopRequireDefault(_immutable);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-	
-	var filter = function filter(languages, _filter) {
-	    return _filter == undefined ? languages : languages.filter(function (f) {
-	        return f.language.toLowerCase().indexOf(_filter) != -1;
-	    });
-	};
-	
-	var mapStateToProps = function mapStateToProps(state) {
-	    return {
-	        data: filter(state.get('languages'), state.get('filter')),
-	        total: state.get('languages').length
-	    };
-	};
-	
-	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-	    return { actions: (0, _redux.bindActionCreators)(actions, dispatch) };
-	};
-	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_languages3.default);
-
-/***/ },
-/* 310 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	exports.populate = populate;
-	function populate(value) {
-	    return { type: 'POPULATE', value: value };
-	}
-
-/***/ },
-/* 311 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function($) {'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(70);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var Languages = function (_React$Component) {
-	    _inherits(Languages, _React$Component);
-	
-	    function Languages() {
-	        _classCallCheck(this, Languages);
-	
-	        return _possibleConstructorReturn(this, (Languages.__proto__ || Object.getPrototypeOf(Languages)).call(this));
-	    }
-	
-	    _createClass(Languages, [{
-	        key: 'componentDidMount',
-	        value: function componentDidMount() {
-	
-	            console.log('Languages - componentDidMount');
-	            $.getJSON("languages", function (data) {
-	                this.setState({ tasks: data }, this.bindPanel);
-	                this.props.actions.populate(data);
-	            }.bind(this));
-	        }
-	    }, {
-	        key: 'createRow',
-	        value: function createRow(item) {
-	            return _react2.default.createElement(
-	                'tr',
-	                { key: item.position },
-	                _react2.default.createElement(
-	                    'td',
-	                    null,
-	                    item.position
-	                ),
-	                _react2.default.createElement(
-	                    'td',
-	                    null,
-	                    item.language
-	                ),
-	                _react2.default.createElement(
-	                    'td',
-	                    null,
-	                    item.rating
-	                )
-	            );
-	        }
-	    }, {
-	        key: 'createHeader',
-	        value: function createHeader(total, filtered) {
-	            return _react2.default.createElement(
-	                'thead',
-	                null,
-	                _react2.default.createElement(
-	                    'tr',
-	                    null,
-	                    _react2.default.createElement(
-	                        'th',
-	                        { colSpan: '3' },
-	                        'Total: ',
-	                        filtered,
-	                        ' of ',
-	                        total
-	                    )
-	                ),
-	                _react2.default.createElement(
-	                    'tr',
-	                    null,
-	                    _react2.default.createElement(
-	                        'th',
-	                        null,
-	                        'Position'
-	                    ),
-	                    _react2.default.createElement(
-	                        'th',
-	                        null,
-	                        'Language'
-	                    ),
-	                    _react2.default.createElement(
-	                        'th',
-	                        null,
-	                        'Rating'
-	                    )
-	                )
-	            );
-	        }
-	    }, {
-	        key: 'render',
-	        value: function render() {
-	            var _this2 = this;
-	
-	            var _props = this.props,
-	                data = _props.data,
-	                total = _props.total;
-	
-	            var rows = data.map(function (m) {
-	                return _this2.createRow(m);
-	            });
-	
-	            return _react2.default.createElement(
-	                'table',
-	                { className: 'table' },
-	                this.createHeader(total, data.length),
-	                _react2.default.createElement(
-	                    'tbody',
-	                    null,
-	                    rows.length == 0 ? _react2.default.createElement(
-	                        'tr',
-	                        null,
-	                        _react2.default.createElement(
-	                            'td',
-	                            { colSpan: '3', style: { textAlign: 'center' } },
-	                            total == 0 ? 'Loading...' : 'Nothing to show.'
-	                        )
-	                    ) : rows
-	                )
-	            );
-	        }
-	    }]);
-	
-	    return Languages;
-	}(_react2.default.Component);
-	
-	exports.default = Languages;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(255)))
-
-/***/ },
-/* 312 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _redux = __webpack_require__(268);
-	
-	var _reactRedux = __webpack_require__(289);
-	
-	var _search = __webpack_require__(313);
-	
-	var actions = _interopRequireWildcard(_search);
-	
-	var _search2 = __webpack_require__(314);
-	
-	var _search3 = _interopRequireDefault(_search2);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-	
-	var mapStateToProps = function mapStateToProps(state) {
-	  return { filter: state.filter };
-	};
-	
-	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-	  return { actions: (0, _redux.bindActionCreators)(actions, dispatch) };
-	};
-	
-	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_search3.default);
-
-/***/ },
-/* 313 */
-/***/ function(module, exports) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	exports.filter = filter;
-	function filter(value) {
-	    return { type: "FILTER", value: value.toLowerCase() };
-	}
-
-/***/ },
-/* 314 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	
-	var _react = __webpack_require__(70);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	exports.default = function (props) {
-	    return _react2.default.createElement(
-	        'div',
-	        null,
-	        _react2.default.createElement('input', {
-	            type: 'text',
-	            placeholder: 'Search for ...',
-	            className: 'form-control',
-	            onChange: function onChange(e) {
-	                return props.actions.filter(e.target.value);
-	            } })
-	    );
-	};
-
-/***/ },
-/* 315 */
+/* 299 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -41997,6 +41421,293 @@
 	  return Immutable;
 	
 	}));
+
+/***/ },
+/* 300 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _redux = __webpack_require__(268);
+	
+	var _reactRedux = __webpack_require__(289);
+	
+	var _languages = __webpack_require__(301);
+	
+	var actions = _interopRequireWildcard(_languages);
+	
+	var _languages2 = __webpack_require__(302);
+	
+	var _languages3 = _interopRequireDefault(_languages2);
+	
+	var _immutable = __webpack_require__(299);
+	
+	var _immutable2 = _interopRequireDefault(_immutable);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	
+	var filter = function filter(languages, _filter) {
+	    return _filter == undefined ? languages : languages.filter(function (f) {
+	        return f.language.toLowerCase().indexOf(_filter) != -1;
+	    });
+	};
+	
+	var mapStateToProps = function mapStateToProps(state) {
+	    return {
+	        data: filter(state.get('languages'), state.get('filter')),
+	        total: state.get('languages').length
+	    };
+	};
+	
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+	    return { actions: (0, _redux.bindActionCreators)(actions, dispatch) };
+	};
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_languages3.default);
+
+/***/ },
+/* 301 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.populate = populate;
+	function populate(value) {
+	    return { type: 'POPULATE', value: value };
+	}
+
+/***/ },
+/* 302 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function($) {'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(70);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Languages = function (_React$Component) {
+	    _inherits(Languages, _React$Component);
+	
+	    function Languages() {
+	        _classCallCheck(this, Languages);
+	
+	        return _possibleConstructorReturn(this, (Languages.__proto__ || Object.getPrototypeOf(Languages)).call(this));
+	    }
+	
+	    _createClass(Languages, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	
+	            console.log('Languages - componentDidMount');
+	            $.getJSON("languages", function (data) {
+	                this.setState({ tasks: data }, this.bindPanel);
+	                this.props.actions.populate(data);
+	            }.bind(this));
+	        }
+	    }, {
+	        key: 'createRow',
+	        value: function createRow(item) {
+	            return _react2.default.createElement(
+	                'tr',
+	                { key: item.position },
+	                _react2.default.createElement(
+	                    'td',
+	                    null,
+	                    item.position
+	                ),
+	                _react2.default.createElement(
+	                    'td',
+	                    null,
+	                    item.language
+	                ),
+	                _react2.default.createElement(
+	                    'td',
+	                    null,
+	                    item.rating
+	                )
+	            );
+	        }
+	    }, {
+	        key: 'createHeader',
+	        value: function createHeader(total, filtered) {
+	            return _react2.default.createElement(
+	                'thead',
+	                null,
+	                _react2.default.createElement(
+	                    'tr',
+	                    null,
+	                    _react2.default.createElement(
+	                        'th',
+	                        { colSpan: '3' },
+	                        'Total: ',
+	                        filtered,
+	                        ' of ',
+	                        total
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'tr',
+	                    null,
+	                    _react2.default.createElement(
+	                        'th',
+	                        null,
+	                        'Position'
+	                    ),
+	                    _react2.default.createElement(
+	                        'th',
+	                        null,
+	                        'Language'
+	                    ),
+	                    _react2.default.createElement(
+	                        'th',
+	                        null,
+	                        'Rating'
+	                    )
+	                )
+	            );
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var _this2 = this;
+	
+	            var _props = this.props,
+	                data = _props.data,
+	                total = _props.total;
+	
+	            var rows = data.map(function (m) {
+	                return _this2.createRow(m);
+	            });
+	
+	            return _react2.default.createElement(
+	                'table',
+	                { className: 'table table-striped table-hover' },
+	                this.createHeader(total, data.length),
+	                _react2.default.createElement(
+	                    'tbody',
+	                    null,
+	                    rows.length == 0 ? _react2.default.createElement(
+	                        'tr',
+	                        null,
+	                        _react2.default.createElement(
+	                            'td',
+	                            { colSpan: '3', style: { textAlign: 'center' } },
+	                            total == 0 ? 'Loading...' : 'Nothing to show.'
+	                        )
+	                    ) : rows
+	                )
+	            );
+	        }
+	    }]);
+	
+	    return Languages;
+	}(_react2.default.Component);
+	
+	exports.default = Languages;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(255)))
+
+/***/ },
+/* 303 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _redux = __webpack_require__(268);
+	
+	var _reactRedux = __webpack_require__(289);
+	
+	var _search = __webpack_require__(304);
+	
+	var actions = _interopRequireWildcard(_search);
+	
+	var _search2 = __webpack_require__(305);
+	
+	var _search3 = _interopRequireDefault(_search2);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	
+	var mapStateToProps = function mapStateToProps(state) {
+	  return { filter: state.filter };
+	};
+	
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+	  return { actions: (0, _redux.bindActionCreators)(actions, dispatch) };
+	};
+	
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_search3.default);
+
+/***/ },
+/* 304 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.filter = filter;
+	function filter(value) {
+	    return { type: "FILTER", value: value.toLowerCase() };
+	}
+
+/***/ },
+/* 305 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _react = __webpack_require__(70);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = function (props) {
+	    return _react2.default.createElement(
+	        'div',
+	        { style: { marginTop: '10px' } },
+	        _react2.default.createElement('input', {
+	            type: 'text',
+	            placeholder: 'Search for ...',
+	            className: 'form-control',
+	            onChange: function onChange(e) {
+	                return props.actions.filter(e.target.value);
+	            } })
+	    );
+	};
 
 /***/ }
 /******/ ]);
